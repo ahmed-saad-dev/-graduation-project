@@ -1,0 +1,29 @@
+/* Tablets */
+@media (max-width: 992px) {
+  .container {
+    width: 95% !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .stack-mobile {
+    flex-direction: column !important;
+  }
+
+  .text-center-mobile {
+    text-align: center !important;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .container {
+    width: 100% !important;
+    padding: 10px !important;
+  }
+}

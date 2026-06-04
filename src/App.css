@@ -1,0 +1,108 @@
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
+
+
+
+.navbar {
+  text-decoration:none;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  background-color:rgb(219, 211, 179);
+  padding: 20px 15px;
+  width: 80%;
+  margin: 20px auto;
+  font-size: 18px;
+  border-radius: 8px;
+}
+li {
+  cursor: pointer;
+}
+
+
+/* LIGHT MODE (default) */
+body {
+  background: #f5f5f5;
+  color: #111;
+  transition: 0.3s ease;
+}
+
+/* DARK MODE */
+body.dark {
+  background: #121212;
+  color: #fff;
+}
+
+/* cards */
+body.dark .card {
+  background: #1e1e1e;
+  color: #fff;
+}
+
+/* items */
+body.dark .item {
+  background: #1a1a1a;
+  border-color: #333;
+}
+
+body.dark .topHeader {
+  background: #1e1e1e;
+}
+
+body.dark .quickItem {
+  background: #222;
+}
+
+/* إخفاء أي chat widget */
+iframe[src*="tawk"],
+iframe[src*="crisp"],
+iframe[src*="intercom"],
+[class*="chat"],
+[class*="widget"],
+[id*="chat"],
+[id*="widget"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

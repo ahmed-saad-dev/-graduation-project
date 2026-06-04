@@ -1,0 +1,16 @@
+.cardHover {
+    position: relative;
+}
+.cardHover:hover .btn {
+  opacity: 1;
+  transform: translateY(70%);
+}
+.btn {
+    opacity: 0;
+    transform: translateY(130%);
+
+}
+.btn:hover {
+    color: #116c42 !important;
+    background-color: #0e5d3824 !important;
+}

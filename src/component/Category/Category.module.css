@@ -1,0 +1,17 @@
+.imagContainer {
+    padding: 30px 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+.imgStyle {
+    display: block;
+    height: 280px;
+    width: 270px;
+    margin: 10px 20px 2px;
+}
+.iconColor {
+    color:  #e27d17;
+}
