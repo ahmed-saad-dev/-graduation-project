@@ -4,36 +4,31 @@
   max-width: 1200px;
   margin: 20px auto 40px;
   padding: 12px 22px;
-
   background: #fff;
   border-radius: 16px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  gap: 16px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-  border: 1px solid #eee;
-
   position: relative;
+  border: 1px solid #eee;
 }
 
 /* ================= LOGO ================= */
 .logo {
   height: 80px;
   object-fit: contain;
-}
-
-@media (max-width: 768px) {
-  .logo {
-    height: 55px;
-  }
+  border-radius: 10px;
+  flex-shrink: 0;
 }
 
 /* ================= SEARCH ================= */
 .searchBox {
   position: relative;
-  width: 420px;
+  flex: 1;           /* يمتد ويملا المساحة المتاحة */
+  max-width: 420px;  /* مش أكبر من كده على ديسكتوب */
+  min-width: 0;
 }
 
 .searchInput {
@@ -42,18 +37,26 @@
   border-radius: 10px;
   border: 2px solid #198754;
   outline: none;
+  font-size: 14px;
+  transition: 0.2s;
+  box-sizing: border-box;
+}
+
+.searchInput:focus {
+  box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.2);
 }
 
 .searchDropdown {
   position: absolute;
   top: 45px;
-  width: 100%;
+  left: 0;
+  right: 0;
   background: #fff;
   border-radius: 12px;
   border: 1px solid #e9ecef;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   z-index: 999;
-  max-height: 300px;
+  max-height: 320px;
   overflow-y: auto;
 }
 
@@ -62,6 +65,8 @@
   gap: 10px;
   padding: 10px;
   cursor: pointer;
+  transition: 0.2s;
+  align-items: center;
 }
 
 .searchItem:hover {
@@ -71,13 +76,15 @@
 .searchItem img {
   width: 45px;
   height: 45px;
-  border-radius: 8px;
   object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
 }
 
 .searchItem p {
   margin: 0;
   font-weight: 600;
+  font-size: 14px;
 }
 
 .searchItem span {
@@ -85,38 +92,38 @@
   color: #198754;
 }
 
-/* ================= ICONS DESKTOP ================= */
+/* ================= ICONS (DESKTOP) ================= */
 .icons {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
-/* ================= ICON BUTTON ================= */
 .iconBtn {
   position: relative;
   width: 44px;
   height: 44px;
   border-radius: 50%;
   background: #f1f3f5;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   color: #198754;
   font-size: 18px;
-
-  transition: 0.25s;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  text-decoration: none;
 }
 
 .iconBtn:hover {
   background: #198754;
   color: #fff;
-  transform: translateY(-3px);
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 6px 15px rgba(25,135,84,0.35);
 }
 
-/* ================= BADGE ================= */
 .badge {
   position: absolute;
   top: -5px;
@@ -130,13 +137,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* ================= MOBILE ICONS ================= */
-.mobileIcons {
-  display: none;
-  align-items: center;
-  gap: 10px;
+  font-weight: bold;
+  pointer-events: none;
 }
 
 /* ================= HAMBURGER ================= */
@@ -145,33 +147,83 @@
   font-size: 26px;
   cursor: pointer;
   color: #198754;
+  flex-shrink: 0;
 }
 
-/* ================= MOBILE ONLY ================= */
+/* ================= MOBILE SEARCH BAR (تحت الناف بار) ================= */
+.mobileSearchBar {
+  display: none; /* hidden on desktop */
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablet: ضغط الـ search شوية */
+@media (max-width: 900px) {
+  .searchBox {
+    max-width: 260px;
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
-  .icons {
-    display: none;
+  .navbar {
+    margin: 10px auto 20px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    flex-wrap: nowrap;
   }
 
-  .mobileIcons {
-    display: flex;
+  /* إخفاء الـ search والـ icons الكبار */
+  .searchBox,
+  .icons {
+    display: none;
   }
 
   .hamburger {
     display: block;
   }
-}
 
-/* ================= MOBILE SEARCH FIX ================= */
-@media (max-width: 768px) {
-  .searchBox {
+  /* شريط السيرش اللي تحت الناف بار */
+  .mobileSearchBar {
+    display: block;
+    width: calc(100% - 28px);
+    max-width: 1200px;
+    margin: -12px auto 16px;
+    padding: 0 14px;
+    position: relative;
+  }
+
+  .mobileSearchBar input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 2px solid #198754;
+    outline: none;
+    font-size: 14px;
+    box-sizing: border-box;
+    background: #fff;
+  }
+
+  .mobileSearchBar input:focus {
+    box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.2);
+  }
+
+  .mobileSearchBar .searchDropdown {
     position: absolute;
-    top: 100%;
-    left: 10px;
-    right: 10px;
-    width: auto;
-    margin-top: 8px;
+    top: 45px;
+    left: 14px;
+    right: 14px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     z-index: 999;
+    max-height: 280px;
+    overflow-y: auto;
+  }
+
+  .logo {
+    height: 52px;
   }
 }
 
@@ -189,28 +241,33 @@
 .mobileMenu {
   width: 280px;
   height: 100%;
-  background: #fff;
+  background: linear-gradient(180deg, #ffffff, #f7fff9);
   padding: 25px 20px;
-
   display: flex;
   flex-direction: column;
   gap: 18px;
-
   animation: slideIn 0.25s ease;
   border-right: 3px solid #198754;
+  box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+  overflow-y: auto;
 }
 
 .mobileMenu a {
   text-decoration: none;
   color: #198754;
   font-weight: 600;
-  padding: 10px;
+  padding: 10px 12px;
   border-radius: 10px;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .mobileMenu a:hover {
   background: #198754;
   color: #fff;
+  transform: translateX(5px);
 }
 
 .close {
@@ -218,31 +275,79 @@
   font-size: 22px;
   cursor: pointer;
   color: #198754;
+  transition: 0.2s;
 }
 
-/* animation */
+.close:hover {
+  transform: rotate(90deg);
+}
+
+/* ================= MOBILE ICONS ROW (inside menu header) ================= */
+.mobileIconsRow {
+  display: flex;
+  gap: 10px;
+  padding: 4px 0 8px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.mobileIconsRow a {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f1f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #198754;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 0;
+  transition: all 0.2s;
+}
+
+.mobileIconsRow a:hover {
+  background: #198754;
+  color: #fff;
+  transform: none;
+}
+
 @keyframes slideIn {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
 }
 
 /* ================= DARK MODE ================= */
 [data-theme="dark"] .navbar {
   background: #1e1e1e;
   border-color: #333;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
-[data-theme="dark"] .searchInput {
+[data-theme="dark"] .searchInput,
+[data-theme="dark"] .mobileSearchBar input {
   background: #2a2a2a;
   color: #fff;
+  border-color: #28a745;
 }
 
-[data-theme="dark"] .searchDropdown {
+[data-theme="dark"] .searchInput::placeholder,
+[data-theme="dark"] .mobileSearchBar input::placeholder {
+  color: #888;
+}
+
+[data-theme="dark"] .searchDropdown,
+[data-theme="dark"] .mobileSearchBar .searchDropdown {
   background: #1e1e1e;
+  border-color: #333;
+}
+
+[data-theme="dark"] .searchItem:hover {
+  background: #2a2a2a;
+}
+
+[data-theme="dark"] .searchItem p {
+  color: #fff;
 }
 
 [data-theme="dark"] .iconBtn {
@@ -250,6 +355,45 @@
   color: #4ade80;
 }
 
+[data-theme="dark"] .iconBtn:hover {
+  background: #28a745;
+  color: #fff;
+}
+
 [data-theme="dark"] .mobileMenu {
-  background: #121212;
+  background: linear-gradient(180deg, #1e1e1e, #121212);
+  border-right-color: #28a745;
+}
+
+[data-theme="dark"] .mobileMenu a {
+  color: #4ade80;
+}
+
+[data-theme="dark"] .mobileMenu a:hover {
+  background: #28a745;
+  color: #fff;
+}
+
+[data-theme="dark"] .mobileIconsRow a {
+  background: #2a2a2a;
+  color: #4ade80;
+}
+
+[data-theme="dark"] .mobileIconsRow a:hover {
+  background: #28a745;
+  color: #fff;
+}
+
+[data-theme="dark"] .mobileIconsRow {
+  border-bottom-color: #333;
+}
+
+[data-theme="dark"] .close,
+[data-theme="dark"] .hamburger {
+  color: #4ade80;
+}
+
+[data-theme="dark"] .mobileSearchBar input {
+  background: #2a2a2a;
+  color: #fff;
 }

@@ -19,6 +19,7 @@ import ChangePassword from "./component/UserProfile/ChangePassword.jsx";
 import ProtectedRout from "./component/protectedRout/protectedRout.jsx";
 import ProductDetails from "./component/ProductDetails/ProductDetails.jsx";
 import AllOrders from "./component/AllOrders/AllOrders.jsx";
+import Bell from "./component/Bell/Bell.jsx"; // ✅ رجعناه
 
 import Cart from "./component/Carts/Carts.jsx";
 import Wishlist from "./component/Wishlist/Wishlist.jsx";
@@ -27,6 +28,7 @@ import UserContextProvider from "./Context/userContext";
 import { CartContextProvider } from "./Context/CartContext.jsx";
 import { WishlistProvider } from "./Context/WishlistContext";
 import ThemeProvider from "./Context/ThemeContext";
+import { NotificationProvider } from "./Context/NotificationContext.jsx";
 
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -45,9 +47,6 @@ import AdminProducts from "./component/AdminProducts/AdminProducts.jsx";
 import AdminReports from "./component/AdminReports/AdminReports.jsx";
 import Checkout from "./component/Checkout/Checkout";
 
-// 🔔 NotificationContext FIX (مهم جدًا)
-import { NotificationProvider } from "./Context/NotificationContext.jsx";
-
 const queryClient = new QueryClient();
 
 const routes = createBrowserRouter([
@@ -64,172 +63,35 @@ const routes = createBrowserRouter([
         ),
       },
       { path: "register", element: <Register /> },
-      { path: "login", element: <Login /> },
+      { path: "login",    element: <Login /> },
 
-      {
-        path: "about",
-        element: (
-          <ProtectedRout>
-            <AboutUs />
-          </ProtectedRout>
-        ),
-      },
-
-      {
-        path: "brands",
-        element: (
-          <ProtectedRout>
-            <Brands />
-          </ProtectedRout>
-        ),
-      },
+      { path: "about",   element: <ProtectedRout><AboutUs /></ProtectedRout> },
+      { path: "brands",  element: <ProtectedRout><Brands /></ProtectedRout> },
 
       {
         path: "ProductDetails/:id/:name?",
-        element: (
-          <ProtectedRout>
-            <ProductDetails />
-          </ProtectedRout>
-        ),
+        element: <ProtectedRout><ProductDetails /></ProtectedRout>,
       },
 
-      {
-        path: "allorders",
-        element: (
-          <ProtectedRout>
-            <AllOrders />
-          </ProtectedRout>
-        ),
-      },
+      { path: "allorders",           element: <ProtectedRout><AllOrders /></ProtectedRout> },
+      { path: "cart",                element: <ProtectedRout><Cart /></ProtectedRout> },
+      { path: "checkout",            element: <ProtectedRout><Checkout /></ProtectedRout> },
+      { path: "wishlist",            element: <ProtectedRout><Wishlist /></ProtectedRout> },
+      { path: "userProf",            element: <ProtectedRout><UserProfile /></ProtectedRout> },
+      { path: "seller",              element: <ProtectedRout><Seller /></ProtectedRout> },
+      { path: "sellerUploadProduct", element: <ProtectedRout><SellerUploadProduct /></ProtectedRout> },
+      { path: "editSellerProfile",   element: <ProtectedRout><EditSellerProfile /></ProtectedRout> },
+      { path: "manageInventory",     element: <ProtectedRout><ManageInventory /></ProtectedRout> },
+      { path: "admin",               element: <ProtectedRout><Admin /></ProtectedRout> },
+      { path: "adminDashboard",      element: <ProtectedRout><AdminDashboard /></ProtectedRout> },
+      { path: "adminProduct",        element: <ProtectedRout><AdminProducts /></ProtectedRout> },
+      { path: "adminReports",        element: <ProtectedRout><AdminReports /></ProtectedRout> },
+      { path: "edit-profile",        element: <ProtectedRout><EditUser /></ProtectedRout> },
+      { path: "change-password",     element: <ProtectedRout><ChangePassword /></ProtectedRout> },
 
-      {
-        path: "cart",
-        element: (
-          <ProtectedRout>
-            <Cart />
-          </ProtectedRout>
-        ),
-      },
-
-      {
-        path: "checkout",
-        element: (
-          <ProtectedRout>
-            <Checkout />
-          </ProtectedRout>
-        ),
-      },
-
-      {
-        path: "wishlist",
-        element: (
-          <ProtectedRout>
-            <Wishlist />
-          </ProtectedRout>
-        ),
-      },
-
-      {
-        path: "userProf",
-        element: (
-          <ProtectedRout>
-            <UserProfile />
-          </ProtectedRout>
-        ),
-      },
-
-      {
-        path: "seller",
-        element: (
-          <ProtectedRout>
-            <Seller />
-          </ProtectedRout>
-        ),
-      },
-
-      {
-        path: "sellerUploadProduct",
-        element: (
-          <ProtectedRout>
-            <SellerUploadProduct />
-          </ProtectedRout>
-        ),
-      },
-
-      {
-        path: "editSellerProfile",
-        element: (
-          <ProtectedRout>
-            <EditSellerProfile />
-          </ProtectedRout>
-        ),
-      },
-
-      {
-        path: "manageInventory",
-        element: (
-          <ProtectedRout>
-            <ManageInventory />
-          </ProtectedRout>
-        ),
-      },
-
-      {
-        path: "admin",
-        element: (
-          <ProtectedRout>
-            <Admin />
-          </ProtectedRout>
-        ),
-      },
-
-      {
-        path: "adminDashboard",
-        element: (
-          <ProtectedRout>
-            <AdminDashboard />
-          </ProtectedRout>
-        ),
-      },
-
-      {
-        path: "adminProduct",
-        element: (
-          <ProtectedRout>
-            <AdminProducts />
-          </ProtectedRout>
-        ),
-      },
-
-      {
-        path: "adminReports",
-        element: (
-          <ProtectedRout>
-            <AdminReports />
-          </ProtectedRout>
-        ),
-      },
-
-      {
-        path: "edit-profile",
-        element: (
-          <ProtectedRout>
-            <EditUser />
-          </ProtectedRout>
-        ),
-      },
-
-      {
-        path: "change-password",
-        element: (
-          <ProtectedRout>
-            <ChangePassword />
-          </ProtectedRout>
-        ),
-      },
-
+      { path: "bell",        element: <ProtectedRout><Bell /></ProtectedRout> }, // ✅ ده كان ناقص
       { path: "help-center", element: <HelpCenter /> },
-      { path: "*", element: <Notfound /> },
+      { path: "*",           element: <Notfound /> },
     ],
   },
 ]);
@@ -243,14 +105,12 @@ export default function App() {
             <WishlistProvider>
               <NotificationProvider>
                 <RouterProvider router={routes} />
-
                 <Offline>
                   <div className="offline bg-warning py-3 d-flex justify-content-center mb-1 mx-1 rounded-1 fw-semibold">
                     Sorry, You are currently{" "}
                     <span className="fw-bold mx-1">offline</span>
                   </div>
                 </Offline>
-
                 <Toaster />
               </NotificationProvider>
             </WishlistProvider>
