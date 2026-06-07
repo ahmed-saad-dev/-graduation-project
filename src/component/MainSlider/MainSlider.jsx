@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./MainSlider.module.css";
 import Slider from "react-slick";
-import img1 from "../../assets/b.png";
-import img2 from "../../assets/c.png";
+// import img1 from "../../assets/b.png";
+// import img2 from "../../assets/c.png";
 import img3 from "../../assets/a.jpg";
 import img4 from "../../assets/d.jpg";
 import img5 from "../../assets/e.jpg";
@@ -78,21 +78,15 @@ export default function MainSlider() {
           </div>
 
           <Slider {...settings} className={styles.slick}>
-            <div className={styles.slide}>
+            {/* <div className={styles.slide}>
               <img
                 src={img1}
                 alt="Summer fashion collection"
                 className={styles.image}
               />
-            </div>
+            </div> */}
 
-            <div className={styles.slide}>
-              <img
-                src={img2}
-                alt="Kids clothing sale"
-                className={styles.image}
-              />
-            </div>
+            
 
             <div className={styles.slide}>
               <img
