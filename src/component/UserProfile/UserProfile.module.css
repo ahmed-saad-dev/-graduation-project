@@ -1,13 +1,15 @@
+/* ─── Container ─── */
 .container {
-  max-width: 35%;
+  max-width: 480px;          /* fixed px cap instead of % */
+  width: 100%;
   margin: 0 auto;
-  padding: 20px 15px;
-  /* background: #f5f5f5 !important; */
+  padding: 0 0 40px;
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f5f5f5;
 }
 
-/* Top Header */
+/* ─── Top Header ─── */
 .topHeader {
   display: flex;
   align-items: center;
@@ -17,34 +19,10 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
 }
 
-.backBtn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: none;
-  background: transparent;
-  color: #333;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  transition: all 0.2s ease;
-}
-
-.backBtn:hover {
-  background: #f0f0f0;
-}
-
-.headerTitle {
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
-}
-
+.backBtn,
 .notificationBtn {
   width: 36px;
   height: 36px;
@@ -57,47 +35,26 @@
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  position: relative;
-  transition: all 0.2s ease;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
 }
 
+.backBtn:hover,
 .notificationBtn:hover {
   background: #f0f0f0;
 }
 
-.editBtn {
-  margin-top: 12px;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 10px;
-  background: #ffffff;
-  color: #28a745;
+.headerTitle {
+  font-size: 18px;
   font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  transition: all 0.25s ease;
+  color: #333;
+  margin: 0;
 }
 
-.editBtn svg {
-  font-size: 14px;
+.notificationBtn {
+  position: relative;
 }
 
-.editBtn:hover {
-  transform: translateY(-2px);
-  background: #f7f7f7;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-}
-
-.editBtn:active {
-  transform: scale(0.98);
-}
 .badge {
   position: absolute;
   top: 2px;
@@ -114,13 +71,12 @@
   justify-content: center;
 }
 
-/* Guest Profile Section */
+/* ─── Guest Profile ─── */
 .guestProfile {
   background: #fff;
   padding: 30px 20px;
   text-align: center;
   border-bottom: 8px solid #f5f5f5;
-
 }
 
 .guestAvatar {
@@ -139,20 +95,20 @@
   font-size: 36px;
 }
 
-.guestName {
+.guestProfile h2 {
   font-size: 20px;
   font-weight: 600;
   color: #333;
-  margin: 0 0 6px 0;
+  margin: 0 0 6px;
 }
 
-.guestSubtitle {
+.guestProfile p {
   font-size: 14px;
   color: #999;
-  margin: 0 0 16px 0;
+  margin: 0 0 16px;
 }
 
-.loginSignupBtn {
+.guestProfile button {
   background: #22c55e;
   color: #fff;
   border: none;
@@ -162,48 +118,38 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-bottom: 12px;
 }
 
-.loginSignupBtn:hover {
+.guestProfile button:hover {
   background: #16a34a;
   transform: translateY(-1px);
 }
 
-.appVersion {
-  font-size: 12px;
-  color: #bbb;
-  margin: 0;
-}
-
-/* Logged In Profile Section */
+/* ─── Logged-in Profile Header ─── */
 .profileHeader {
   background: linear-gradient(135deg, #28a745, #1e7e34);
   color: #fff;
   text-align: center;
   padding: 30px 20px;
   border-radius: 0 0 20px 20px;
-  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+  box-shadow: 0 4px 15px rgba(40,167,69,.3);
   margin-bottom: 20px;
-
 }
 
 .avatarLarge {
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255,255,255,.25);
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
-  border: 3px solid white;
+  border: 3px solid #fff;
   transition: transform 0.3s ease;
 }
 
-.avatarLarge:hover {
-  transform: scale(1.05);
-}
+.avatarLarge:hover { transform: scale(1.05); }
 
 .initials {
   font-size: 30px;
@@ -211,37 +157,19 @@
   color: #fff;
 }
 
-.spinner {
-  animation: spin 1s linear infinite;
-}
+.spinner { animation: spin 1s linear infinite; }
 
 @keyframes spin {
   from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  to   { transform: rotate(360deg); }
 }
 
-.loadingText {
-  color: #fff;
-  margin-top: 12px;
-  opacity: 0.8;
-}
-
-.userName {
-  margin-top: 12px;
-  margin-bottom: 6px;
+.profileHeader h2 {
+  margin: 12px 0 6px;
   font-size: 20px;
 }
 
-.userInfo {
-  opacity: 0.85;
-  margin-bottom: 4px;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
+/* ─── Edit Button ─── */
 .editBtn {
   margin-top: 12px;
   padding: 10px 18px;
@@ -249,20 +177,25 @@
   border-radius: 10px;
   background: #fff;
   color: #28a745;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 14px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+  transition: all 0.25s ease;
 }
 
 .editBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: #f7f7f7;
+  box-shadow: 0 6px 14px rgba(0,0,0,.15);
 }
 
-/* Quick Actions */
+.editBtn:active { transform: scale(0.98); }
+
+/* ─── Quick Actions ─── */
 .quickActions {
   display: flex;
   gap: 12px;
@@ -279,6 +212,7 @@
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-width: 0;          /* prevent overflow in flex */
 }
 
 .quickItem:hover {
@@ -293,7 +227,7 @@
 }
 
 .quickNumber {
-  margin: 0 0 4px 0;
+  margin: 0 0 4px;
   color: #333;
   font-size: 20px;
   font-weight: bold;
@@ -304,9 +238,9 @@
   font-size: 12px;
 }
 
-/* Section Title */
+/* ─── Section Title ─── */
 .sectionTitle {
-  padding: 16px 16px 8px 16px;
+  padding: 16px 16px 8px;
   color: #999;
   font-size: 12px;
   font-weight: 600;
@@ -316,7 +250,7 @@
   margin: 0;
 }
 
-/* Card / List */
+/* ─── Card / List ─── */
 .card {
   background: #fff;
   margin-bottom: 8px;
@@ -332,13 +266,8 @@
   transition: background 0.2s ease;
 }
 
-.item:last-child {
-  border-bottom: none;
-}
-
-.item:hover {
-  background: #f8f9fa;
-}
+.item:last-child { border-bottom: none; }
+.item:hover { background: #f8f9fa; }
 
 .left {
   display: flex;
@@ -351,6 +280,7 @@
 .left svg {
   font-size: 18px;
   color: #666;
+  flex-shrink: 0;
 }
 
 .rightContent {
@@ -377,28 +307,22 @@
   font-size: 18px;
 }
 
-/* Toggle Switch */
+/* ─── Toggle Switch ─── */
 .switch {
   position: relative;
   display: inline-block;
   width: 48px;
   height: 26px;
+  flex-shrink: 0;
 }
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+.switch input { opacity: 0; width: 0; height: 0; }
 
 .slider {
   position: absolute;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
+  inset: 0;
+  background: #ccc;
   transition: 0.3s;
   border-radius: 26px;
 }
@@ -410,21 +334,16 @@
   width: 20px;
   left: 3px;
   bottom: 3px;
-  background-color: white;
+  background: #fff;
   transition: 0.3s;
   border-radius: 50%;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
 }
 
-.switch input:checked + .slider {
-  background-color: #4ade80;
-}
+.switch input:checked + .slider { background: #4ade80; }
+.switch input:checked + .slider:before { transform: translateX(22px); }
 
-.switch input:checked + .slider:before {
-  transform: translateX(22px);
-}
-
-/* Logout Button */
+/* ─── Logout ─── */
 .logoutSection {
   padding: 16px;
   background: #fff;
@@ -433,8 +352,9 @@
 }
 
 .logoutBtn {
-  width: 50%;
-  margin: 3px auto;
+  width: 100%;          /* full width — readable on all screens */
+  max-width: 280px;     /* but capped on desktop */
+  margin: 0 auto;
   padding: 14px;
   border-radius: 12px;
   border: none;
@@ -443,49 +363,33 @@
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   transition: all 0.3s ease;
 }
 
-.logoutBtn:hover {
-  background: #c82333;
-}
+.logoutBtn:hover { background: #c82333; }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .quickActions {
-    gap: 8px;
-    padding: 12px;
-  }
-
-  .quickItem {
-    padding: 10px 6px;
-  }
-
-  .quickNumber {
-    font-size: 18px;
-  }
-}
-
-
-/* ===== Language Modal ===== */
+/* ─── Language Modal ─── */
 .modalOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
+  inset: 0;
+  background: rgba(0,0,0,.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999;
+  padding: 16px;        /* so modal doesn't bleed on tiny phones */
 }
 
 .modal {
   background: #fff;
   padding: 20px;
   border-radius: 12px;
-  width: 250px;
+  width: 100%;
+  max-width: 260px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -498,48 +402,44 @@
   border-radius: 8px;
   cursor: pointer;
   background: #f2f2f2;
+  font-size: 15px;
 }
 
-.modal button:hover {
-  background: #ddd;
-}
+.modal button:hover { background: #ddd; }
 
 .closeBtn {
   background: #ff4d4d !important;
   color: #fff;
 }
 
-
-/* ===== DARK MODE ===== */
-
-.dark {
-  background: #121212 !important;
+/* ─── Responsive tweaks ─── */
+@media (max-width: 400px) {
+  .quickActions { gap: 8px; padding: 12px; }
+  .quickItem    { padding: 10px 6px; }
+  .quickNumber  { font-size: 17px; }
+  .quickIcon    { font-size: 18px; }
+  .profileHeader { padding: 24px 16px; }
+  .avatarLarge  { width: 76px; height: 76px; }
+  .initials     { font-size: 26px; }
 }
 
-/* Navbar / Top Header */
+/* ─── DARK MODE ─── */
+.dark { background: #121212 !important; }
+
 .dark .topHeader {
   background: #1e1e1e;
-  color: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.3);
 }
 
-.dark .headerTitle {
-  color: #fff;
-}
+.dark .headerTitle { color: #fff; }
 
 .dark .backBtn,
-.dark .notificationBtn {
-  color: #fff;
-}
+.dark .notificationBtn { color: #fff; }
 
 .dark .backBtn:hover,
-.dark .notificationBtn:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
+.dark .notificationBtn:hover { background: rgba(255,255,255,.1); }
 
-/* cards */
-.dark .card {
-  background: #1e1e1e;
-}
+.dark .card { background: #1e1e1e; }
 
 .dark .item {
   background: transparent;
@@ -547,80 +447,29 @@
   border-bottom: 1px solid #333;
 }
 
-.dark .item:hover {
-  background: rgba(255, 255, 255, 0.05);
-}
+.dark .item:hover { background: rgba(255,255,255,.05); }
 
-.dark .left span {
-  color: #fff;
-}
+.dark .left span { color: #fff; }
+.dark .left svg  { color: #aaa; }
 
-.dark .sectionTitle {
-  background: #121212;
-  color: #aaa;
-}
+.dark .sectionTitle { background: #121212; color: #aaa; }
 
-/* profile header */
-.dark .profileHeader {
-  background: linear-gradient(135deg, #111, #222);
-}
+.dark .profileHeader { background: linear-gradient(135deg, #111, #222); }
 
+.dark .quickActions  { background: #1e1e1e; }
+.dark .quickItem     { background: #2a2a2a; }
+.dark .quickItem:hover { background: #333; }
+.dark .quickNumber   { color: #fff; }
+.dark .quickTitle    { color: #aaa; }
 
-/* ===== DARK MODE MISSING PIECES ===== */
-.dark .quickActions {
-  background: #1e1e1e;
-}
+.dark .guestProfile  { background: #1e1e1e; color: #fff; }
 
-.dark .quickItem {
-  background: #2a2a2a;
-}
+.dark .logoutSection { background: #1e1e1e; }
 
-.dark .quickItem:hover {
-  background: #333;
-}
+.dark .modal         { background: #1e1e1e; color: #fff; }
+.dark .modal button  { background: #2a2a2a; color: #fff; }
+.dark .modal button:hover { background: #333; }
 
-.dark .quickNumber {
-  color: #fff;
-}
+.dark .arrow  { color: #555; }
 
-.dark .quickTitle {
-  color: #aaa;
-}
-
-.dark .guestProfile {
-  background: #1e1e1e;
-  color: #fff;
-}
-
-.dark .logoutSection {
-  background: #1e1e1e;
-}
-
-.dark .modal {
-  background: #1e1e1e;
-  color: #fff;
-}
-
-.dark .modal button {
-  background: #2a2a2a;
-  color: #fff;
-}
-
-.dark .modal button:hover {
-  background: #333;
-}
-
-.dark .left svg {
-  color: #aaa;
-}
-
-.dark .arrow {
-  color: #555;
-}
-
-.dark .editBtn {
-  background: #2a2a2a;
-  color: #4ade80;
-}
-
-
+.dark .editBtn { background: #2a2a2a; color: #4ade80; }
