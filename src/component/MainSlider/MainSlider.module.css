@@ -1,278 +1,229 @@
+/* ============================================================
+   MAINSLIDER — EGZone Luxury Dark
+   Purple #6d28d9  |  Gold #c9a84c  |  BG #0a0a0f
+   ============================================================ */
+
+.root {
+  width: 100%;
+  
+}
+
+/* ── CONTAINER ── */
 .sliderContainer {
-  width: 100%;
-  padding: 0 15px;
-  margin: 0 auto;
-}
-
-.slider {
-  width: 100%;
-  max-width: 1400px;
-  height: 500px;
-  margin: 80px auto 0;
   position: relative;
+  width: 100%;
+  height: 520px;
   overflow: hidden;
-  border-radius: 24px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  cursor: default; /* Normal cursor, not pointer */
+  background: #0a0a0f;
+  border-bottom: 2px solid #6d28d9;
 }
 
+/* ── GRADIENT OVERLAY — darkens whole slide for text readability ── */
 .overlay {
   position: absolute;
   inset: 0;
-  border-radius: 24px;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.4) 50%,
-    rgba(0, 0, 0, 0.1) 100%
-  );
-  z-index: 5;
-  pointer-events: none; /* Allows clicks to pass through */
+  background: rgba(10, 10, 15, 0.58);
+  z-index: 2;
+  pointer-events: none;
 }
 
-.content {
+/* ── BOTTOM GLOW LINE ── */
+.glowLine {
   position: absolute;
-  bottom: 12%;
-  left: 6%;
-  z-index: 10;
-  max-width: 550px;
-  animation: fadeInUp 0.8s ease-out;
-  cursor: default; /* Normal cursor */
-  user-select: none; /* Prevents text selection */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, #6d28d9, #c9a84c, #6d28d9);
+  z-index: 5;
 }
 
-.badge {
-  background: #198754;
-  color: #fff;
-  padding: 8px 20px;
-  border-radius: 50px;
-  font-size: 13px;
-  font-weight: 700;
-  display: inline-block;
-  margin-bottom: 16px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  box-shadow: 0 2px 10px rgba(25, 135, 84, 0.3);
-  cursor: default;
-  user-select: none;
+/* ── SLICK (images) ── */
+.slick {
+  position: absolute !important;
+  inset: 0;
+  z-index: 1;
 }
 
-.title {
-  color: #fff;
-  font-size: 56px;
-  font-weight: 800;
-  margin: 0 0 12px;
-  line-height: 1.1;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  cursor: default;
-  user-select: none;
-}
-
-.description {
-  color: rgba(255, 255, 255, 0.95);
-  font-size: 18px;
-  line-height: 1.6;
-  margin-bottom: 28px;
-  font-weight: 500;
-  cursor: default;
-  user-select: none;
-}
-
-.shopButton {
-  background: #198754;
-  color: #fff;
-  border: none;
-  padding: 14px 32px;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: default; /* Normal cursor, not pointer */
-  transition: none; /* No transitions */
-  box-shadow: 0 4px 15px rgba(25, 135, 84, 0.4);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  pointer-events: none; /* Completely non-interactive */
-  opacity: 1;
-}
-
-/* No hover effects at all */
-.shopButton:hover {
-  transform: none;
-  box-shadow: 0 4px 15px rgba(25, 135, 84, 0.4);
-  background: #198754;
-}
-
-.slide {
-  width: 100%;
-  height: 500px;
-  pointer-events: none; /* Images don't capture clicks */
-}
+.slide { height: 520px; }
 
 .image {
   width: 100%;
-  height: 100%;
-  border-radius: 24px;
+  height: 520px;
   object-fit: cover;
-  pointer-events: none; /* Images are non-clickable */
+  object-position: center;
+  display: block;
+  filter: brightness(0.75) saturate(0.9);
 }
 
-.slick {
-  width: 100%;
-  height: 100%;
+/* ── TEXT CONTENT — centered ── */
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: 90%;
+  max-width: 620px;
+  animation: fadeInUp 0.8s ease both;
+  text-align: center;
 }
 
-/* Responsive Design */
+/* BADGE */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(109, 40, 217, 0.2);
+  border: 1.5px solid #6d28d9;
+  color: #c4b5fd;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+  animation: badgePulse 2.4s infinite;
+}
+
+.badgeDot {
+  width: 7px;
+  height: 7px;
+  background: #c9a84c;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: badgePulse 1.5s infinite;
+}
+
+/* TITLE */
+.title {
+  font-size: 54px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  margin: 0 0 16px;
+  letter-spacing: -1.5px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+
+.titleAccent {
+  color: #c9a84c;
+  display: block;
+}
+
+/* DESCRIPTION */
+.description {
+  font-size: 16px;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.7;
+  margin: 0 0 28px;
+  font-weight: 400;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.shopBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #6d28d9;
+  border: 2px solid #6d28d9;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 13px 28px;
+  border-radius: 10px;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.shopBtn:hover { background: #c9a84c; border-color: #c9a84c; }
+
+.btnArrow {
+  font-size: 18px;
+  transition: transform 0.2s;
+}
+
+.offersBtn {
+  background: transparent;
+  border: 2px solid #c9a84c;
+  color: #c9a84c;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 13px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.offersBtn:hover { background: #c9a84c; color: #0a0a0f; }
+
+/* TRUST BADGES */
+.trust {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  font-weight: 500;
+}
+.trust span { display: flex; align-items: center; gap: 5px; }
+
+/* ══ RESPONSIVE ══ */
 @media (max-width: 1024px) {
-  .slider {
-    height: 450px;
-  }
-  
-  .slide {
-    height: 450px;
-  }
-  
-  .title {
-    font-size: 48px;
-  }
-  
-  .description {
-    font-size: 16px;
-  }
-  
-  .content {
-    max-width: 500px;
-  }
+  .sliderContainer { height: 440px; }
+  .slide, .image   { height: 440px; }
+  .title           { font-size: 42px; }
+  .content         { max-width: 420px; }
 }
 
 @media (max-width: 768px) {
-  .sliderContainer {
-    padding: 0 10px;
+  .sliderContainer { height: 380px; }
+  .slide, .image   { height: 380px; }
+
+  .overlay {
+    background: linear-gradient(
+      to top,
+      rgba(10,10,15,0.97) 0%,
+      rgba(10,10,15,0.7)  50%,
+      rgba(10,10,15,0.3)  100%
+    );
   }
-  
-  .slider {
-    height: 400px;
-    margin: 60px auto 0;
-  }
-  
-  .slide {
-    height: 400px;
-  }
-  
+
   .content {
-    bottom: 10%;
-    left: 5%;
-    max-width: 90%;
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    transform: none;
+    max-width: 100%;
+    padding: 20px 18px 60px;
+    text-align: center;
   }
-  
-  .badge {
-    font-size: 11px;
-    padding: 6px 14px;
-    margin-bottom: 12px;
-  }
-  
-  .title {
-    font-size: 36px;
-    margin-bottom: 8px;
-  }
-  
-  .description {
-    font-size: 14px;
-    margin-bottom: 20px;
-    line-height: 1.5;
-  }
-  
-  .shopButton {
-    padding: 10px 24px;
-    font-size: 14px;
-  }
+
+  .title          { font-size: 28px; letter-spacing: -0.5px; }
+  .titleAccent    { display: inline; }
+  .description    { font-size: 13px; margin-bottom: 18px; }
+  .actions        { justify-content: center; }
+  .shopBtn        { padding: 11px 20px; font-size: 14px; }
+  .offersBtn      { padding: 11px 18px; font-size: 14px; }
+  .trust          { justify-content: center; font-size: 11px; gap: 12px; }
+  .badge          { font-size: 10px; }
 }
 
 @media (max-width: 480px) {
-  .slider {
-    height: 350px;
-    border-radius: 16px;
-  }
-  
-  .slide {
-    height: 350px;
-  }
-  
-  .overlay {
-    border-radius: 16px;
-    background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.85) 0%,
-      rgba(0, 0, 0, 0.5) 100%
-    );
-  }
-  
-  .title {
-    font-size: 28px;
-  }
-  
-  .badge {
-    font-size: 10px;
-    padding: 5px 12px;
-  }
-  
-  .description {
-    font-size: 12px;
-    margin-bottom: 16px;
-  }
-  
-  .shopButton {
-    padding: 8px 20px;
-    font-size: 12px;
-  }
-  
-  .content {
-    bottom: 8%;
-    left: 4%;
-  }
-}
-
-/* Tablet Landscape */
-@media (min-width: 769px) and (max-width: 1024px) and (orientation: landscape) {
-  .slider {
-    height: 400px;
-  }
-  
-  .slide {
-    height: 400px;
-  }
-  
-  .title {
-    font-size: 40px;
-  }
-}
-
-/* Large Screens */
-@media (min-width: 1400px) {
-  .slider {
-    max-width: 1400px;
-  }
-  
-  .title {
-    font-size: 64px;
-  }
-  
-  .description {
-    font-size: 20px;
-  }
-  
-  .shopButton {
-    padding: 16px 36px;
-    font-size: 18px;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .sliderContainer { height: 340px; }
+  .slide, .image   { height: 340px; }
+  .title           { font-size: 24px; }
+  .actions         { flex-direction: column; align-items: stretch; }
+  .shopBtn,
+  .offersBtn       { justify-content: center; text-align: center; }
 }

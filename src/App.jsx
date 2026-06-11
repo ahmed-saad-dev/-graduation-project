@@ -46,7 +46,7 @@ import AdminDashboard from "./component/AdminDashboard/AdminDashboard.jsx";
 import AdminProducts from "./component/AdminProducts/AdminProducts.jsx";
 import AdminReports from "./component/AdminReports/AdminReports.jsx";
 import Checkout from "./component/Checkout/Checkout";
-
+import Offers from "./component/navbar/Offers";
 const queryClient = new QueryClient();
 
 const routes = createBrowserRouter([
@@ -92,6 +92,10 @@ const routes = createBrowserRouter([
       { path: "bell",        element: <ProtectedRout><Bell /></ProtectedRout> }, // ✅ ده كان ناقص
       { path: "help-center", element: <HelpCenter /> },
       { path: "*",           element: <Notfound /> },
+      {
+  path: "/offers",
+  element: <Offers />,
+}
     ],
   },
 ]);

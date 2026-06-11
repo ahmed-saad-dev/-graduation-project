@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   FaArrowLeft,
   FaRegBell,
@@ -19,11 +20,12 @@ import {
   FaEdit,
   FaChevronRight,
   FaSignOutAlt,
+  FaKey, // ✅ أضفنا أيقونة كلمة المرور
 } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../../Context/userContext";
-import { ThemeContext } from "../../Context/ThemeContext"; // ✅ ضيفنا ده
+import { ThemeContext } from "../../Context/ThemeContext";
 import axios from "axios";
 import styles from "./UserProfile.module.css";
 
@@ -32,7 +34,7 @@ const BASE_URL = "https://egzone.runasp.net/api/UserProfile";
 export default function UserProfile() {
   const [alerts, setAlerts] = useState(true);
 
-  const { theme, toggleTheme } = useContext(ThemeContext); // ✅ بدل الـ local state
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -138,6 +140,7 @@ export default function UserProfile() {
   const handleHelpCenter = () => navigate("/help-center");
   const handleAboutUs = () => navigate("/about");
   const handleSavedItems = () => navigate("/wishlist");
+  const handleChangePassword = () => navigate("/change-password"); // ✅ إضافة دالة تغيير كلمة المرور
 
   const handlePriceDropAlerts = () => {
     const newValue = !alerts;
@@ -156,18 +159,16 @@ export default function UserProfile() {
   const isLoggedIn = !!userData && permission.isLogin;
 
   return (
-    <div className={`${styles.container} ${theme === "dark" ? styles.dark : ""}`}> {/* ✅ عدلنا الشرط */}
+    <div className={`${styles.container} ${theme === "dark" ? styles.dark : ""}`}>
 
       {/* LANGUAGE MODAL */}
       {showLangModal && (
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
             <h3>Choose Language</h3>
-
             <button onClick={() => selectLanguage("ar")}>🇪🇬 العربية</button>
             <button onClick={() => selectLanguage("en")}>🇺🇸 English</button>
             <button onClick={() => selectLanguage("fr")}>🇫🇷 Français</button>
-
             <button
               className={styles.closeBtn}
               onClick={() => setShowLangModal(false)}
@@ -180,9 +181,9 @@ export default function UserProfile() {
 
       {/* HEADER */}
       <div className={styles.topHeader}>
-        <button className={styles.backBtn} onClick={() => navigate(-1)}>
+        <Link to="/" className={styles.backBtn}>
           <FaArrowLeft />
-        </button>
+        </Link>
 
         <h1 className={styles.headerTitle}>Profile</h1>
 
@@ -252,7 +253,7 @@ export default function UserProfile() {
       <p className={styles.sectionTitle}>Settings</p>
 
       <div className={styles.card}>
-        <div className={styles.item} onClick={toggleTheme}> {/* ✅ بدل handleThemeToggle */}
+        <div className={styles.item} onClick={toggleTheme}>
           <div className={styles.left}>
             <FaMoon />
             <span>Theme</span>
@@ -266,7 +267,37 @@ export default function UserProfile() {
           </div>
           <FaChevronRight />
         </div>
+
+        {/* ✅ إضافة خيار تغيير كلمة المرور - يظهر فقط للمستخدمين المسجلين */}
+        {isLoggedIn && (
+          <div className={styles.item} onClick={handleChangePassword}>
+            <div className={styles.left}>
+              <FaKey />
+              <span>Change Password</span>
+            </div>
+            <FaChevronRight />
+          </div>
+        )}
       </div>
+
+      {/* SECURITY SECTION - اختياري */}
+      {isLoggedIn && (
+        <>
+          <p className={styles.sectionTitle}>Security</p>
+          <div className={styles.card}>
+            <div className={styles.item} onClick={handleChangePassword}>
+              <div className={styles.left}>
+                <FaLock />
+                <span>Password</span>
+              </div>
+              <div className={styles.rightContent}>
+                <span className={styles.itemBadge}>Update</span>
+                <FaChevronRight />
+              </div>
+            </div>
+          </div>
+        </>
+      )}
 
       {/* SUPPORT */}
       <p className={styles.sectionTitle}>Support</p>

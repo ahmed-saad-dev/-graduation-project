@@ -11,8 +11,9 @@ import { WishlistContext } from "../../Context/WishlistContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeContext } from "../../Context/ThemeContext";
 import Navbar from "../Navbar/Navbar";
+import styles from "./ProductDetails.module.css"; // ✅ استيراد الـ CSS المنفصل
 
-/* ─── responsive breakpoint helpers (inline style approach) ─── */
+/* ─── responsive breakpoint helpers ─── */
 const useWindowWidth = () => {
   const [width, setWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200
@@ -36,16 +37,16 @@ export default function ProductDetails() {
   const isTablet = width >= 640 && width < 1024;
   const isDesktop = width >= 1024;
 
-  const [product, setProduct]         = useState(null);
-  const [loading, setLoading]         = useState(true);
-  const [activeImg, setActiveImg]     = useState(0);
-  const [zoom, setZoom]               = useState(false);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [activeImg, setActiveImg] = useState(0);
+  const [zoom, setZoom] = useState(false);
   const [loadingCart, setLoadingCart] = useState(false);
-  const [loadingFav, setLoadingFav]   = useState(false);
-  const [qty, setQty]                 = useState(1);
-  const [added, setAdded]             = useState(false);
+  const [loadingFav, setLoadingFav] = useState(false);
+  const [qty, setQty] = useState(1);
+  const [added, setAdded] = useState(false);
 
-  const { addToCart }                   = useContext(cartContext);
+  const { addToCart } = useContext(cartContext);
   const { toggleWishlist, isInWishlist } = useContext(WishlistContext);
 
   const fav = product ? isInWishlist(product.id) : false;
@@ -61,7 +62,10 @@ export default function ProductDetails() {
     }
   }
 
-  useEffect(() => { getProduct(); setActiveImg(0); }, [id]);
+  useEffect(() => {
+    getProduct();
+    setActiveImg(0);
+  }, [id]);
 
   const imgFix = (url) => url?.startsWith("http") ? url : `https://egzone.runasp.net${url}`;
 
@@ -81,7 +85,10 @@ export default function ProductDetails() {
 
   async function handleFav() {
     const token = localStorage.getItem("userToken");
-    if (!token) { toast.error("Please login first"); return; }
+    if (!token) {
+      toast.error("Please login first");
+      return;
+    }
     setLoadingFav(true);
     const ok = await toggleWishlist(product.id);
     if (ok) {
@@ -93,259 +100,10 @@ export default function ProductDetails() {
   }
 
   if (loading) return <Loader />;
-  if (!product)  return null;
+  if (!product) return null;
 
   const discountedPrice = Math.round(product?.price * 1.2);
-  const saving          = discountedPrice - product?.price;
-
-  /* ─── derived size values ─── */
-  const productNameSize = isMobile ? 24 : isTablet ? 28 : 34;
-  const priceMainSize   = isMobile ? 28 : isTablet ? 32 : 38;
-
-  const styles = {
-    page: {
-      background: dk ? "#121212" : "#faf8f4",
-      minHeight: "100vh",
-      fontFamily: "'DM Sans', sans-serif",
-      transition: "background 0.3s ease",
-      marginBottom: 30,
-    },
-
-    /* ── layout grid ── */
-    grid: {
-      display: "grid",
-      gridTemplateColumns: isDesktop ? "1fr 1fr" : "1fr", // single col on mobile/tablet
-      minHeight: isDesktop ? "calc(100vh - 80px)" : "auto",
-    },
-
-    /* ── left / image panel ── */
-    left: {
-      background: dk ? "#1e1e1e" : "#fff",
-      padding: isMobile ? 16 : 32,
-      display: "flex",
-      flexDirection: "column",
-      gap: 16,
-      borderRight: isDesktop ? `1px solid ${dk ? "#333" : "#e8e2d9"}` : "none",
-      borderBottom: !isDesktop ? `1px solid ${dk ? "#333" : "#e8e2d9"}` : "none",
-      /* sticky only on desktop */
-      position: isDesktop ? "sticky" : "relative",
-      top: isDesktop ? 0 : "auto",
-      height: isDesktop ? "100vh" : "auto",
-      overflowY: isDesktop ? "auto" : "visible",
-    },
-
-    galleryMain: {
-      background: dk ? "#2a2a2a" : "#faf8f4",
-      borderRadius: 16,
-      aspectRatio: "1",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      position: "relative",
-      overflow: "hidden",
-      cursor: "zoom-in",
-      /* cap height on mobile so it doesn't dominate the viewport */
-      maxHeight: isMobile ? 300 : "none",
-    },
-
-    mainImg: { width: "80%", height: "80%", objectFit: "contain" },
-
-    zoomBadge: {
-      position: "absolute",
-      top: 12,
-      right: 12,
-      background: dk ? "rgba(30,30,30,0.9)" : "rgba(255,255,255,0.9)",
-      border: `1px solid ${dk ? "#444" : "#e8e2d9"}`,
-      borderRadius: 20,
-      padding: "4px 10px",
-      fontSize: 11,
-      color: dk ? "#aaa" : "#8a8580",
-    },
-
-    /* thumbnails scroll horizontally on mobile */
-    thumbRow: {
-      display: "flex",
-      gap: 10,
-      flexWrap: isMobile ? "nowrap" : "wrap",
-      overflowX: isMobile ? "auto" : "visible",
-      paddingBottom: isMobile ? 4 : 0,
-      /* hide scrollbar but allow scrolling */
-      scrollbarWidth: "none",
-      msOverflowStyle: "none",
-    },
-
-    /* ── right / info panel ── */
-    right: {
-      padding: isMobile ? "24px 16px" : isTablet ? "32px 24px" : "40px 36px",
-      display: "flex",
-      flexDirection: "column",
-      overflowY: isDesktop ? "auto" : "visible",
-      height: isDesktop ? "100vh" : "auto",
-      background: dk ? "#121212" : "#fff",
-    },
-
-    tag: {
-      display: "inline-flex",
-      alignItems: "center",
-      gap: 6,
-      background: dk ? "#2a2a2a" : "#f5edd8",
-      color: dk ? "#c8a96e" : "#9a7030",
-      borderRadius: 20,
-      padding: "4px 14px",
-      fontSize: 12,
-      fontWeight: 500,
-      letterSpacing: ".5px",
-      marginBottom: 14,
-      width: "fit-content",
-    },
-
-    productName: {
-      fontFamily: "'Playfair Display', serif",
-      fontSize: productNameSize,
-      fontWeight: 900,
-      lineHeight: 1.15,
-      color: dk ? "#fff" : "#1a1714",
-      marginBottom: 10,
-    },
-
-    ratingRow: { display: "flex", alignItems: "center", gap: 8, marginBottom: 18, flexWrap: "wrap" },
-
-    desc: {
-      fontSize: isMobile ? 14 : 15,
-      color: dk ? "#aaa" : "#8a8580",
-      lineHeight: 1.75,
-      marginBottom: 20,
-    },
-
-    divider: { height: 1, background: dk ? "#333" : "#e8e2d9", margin: "18px 0" },
-
-    priceRow: { display: "flex", alignItems: "baseline", gap: 12, marginBottom: 6, flexWrap: "wrap" },
-
-    priceMain: {
-      fontFamily: "'Playfair Display', serif",
-      fontSize: priceMainSize,
-      fontWeight: 700,
-      color: dk ? "#fff" : "#1a1714",
-    },
-
-    priceOld: {
-      fontSize: isMobile ? 15 : 18,
-      color: dk ? "#777" : "#8a8580",
-      textDecoration: "line-through",
-    },
-
-    saleChip: {
-      background: "#b5392a",
-      color: "#fff",
-      borderRadius: 6,
-      padding: "3px 8px",
-      fontSize: 11,
-      fontWeight: 500,
-    },
-
-    saving: { fontSize: 13, color: dk ? "#4ade80" : "#2d5a3d", marginBottom: 0 },
-
-    /* action row wraps on very small screens */
-    actionRow: {
-      display: "flex",
-      alignItems: "center",
-      gap: 10,
-      marginTop: 4,
-      flexWrap: isMobile ? "wrap" : "nowrap",
-    },
-
-    qtyCtrl: {
-      display: "flex",
-      alignItems: "center",
-      border: `1.5px solid ${dk ? "#444" : "#e8e2d9"}`,
-      borderRadius: 10,
-      overflow: "hidden",
-      flexShrink: 0,
-    },
-
-    qtyBtn: {
-      width: 36, height: 48,
-      background: dk ? "#2a2a2a" : "none",
-      border: "none",
-      cursor: "pointer",
-      fontSize: 18,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      color: dk ? "#fff" : "#1a1714",
-    },
-
-    qtyNum: {
-      width: 38, textAlign: "center", fontWeight: 600, fontSize: 15,
-      borderLeft: `1.5px solid ${dk ? "#444" : "#e8e2d9"}`,
-      borderRight: `1.5px solid ${dk ? "#444" : "#e8e2d9"}`,
-      height: 48, display: "flex", alignItems: "center", justifyContent: "center",
-      color: dk ? "#fff" : "#1a1714",
-      background: dk ? "#1e1e1e" : "none",
-    },
-
-    btnCart: {
-      /* full-width on mobile when wrapped */
-      flex: isMobile ? "1 1 100%" : 1,
-      border: "none",
-      borderRadius: 12,
-      padding: "14px 20px",
-      fontSize: isMobile ? 14 : 15,
-      fontWeight: 500,
-      cursor: "pointer",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 8,
-      fontFamily: "inherit",
-      transition: "background .2s, box-shadow .2s",
-    },
-
-    btnFav: {
-      width: 50, height: 50,
-      border: `1.5px solid ${dk ? "#444" : "#e8e2d9"}`,
-      borderRadius: 12,
-      cursor: "pointer",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      fontSize: 22,
-      flexShrink: 0,
-      transition: "all .2s",
-      background: dk ? "#2a2a2a" : "#fff",
-    },
-
-    features: { display: "flex", flexWrap: "wrap", gap: 8 },
-
-    feature: {
-      display: "flex", alignItems: "center", gap: 6,
-      fontSize: 12, color: dk ? "#ccc" : "#5a5750",
-      background: dk ? "#2a2a2a" : "#f5f2ee",
-      border: `1px solid ${dk ? "#444" : "#e8e2d9"}`,
-      borderRadius: 20, padding: "5px 12px", fontWeight: 500,
-    },
-
-    trust: {
-      display: "flex",
-      gap: 10,
-      marginTop: 18,
-      flexWrap: isMobile ? "wrap" : "nowrap",
-    },
-
-    trustItem: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      gap: 4,
-      /* two-per-row on mobile */
-      flex: isMobile ? "1 1 calc(50% - 5px)" : 1,
-      padding: isMobile ? "10px 6px" : "12px 8px",
-      background: dk ? "#1e1e1e" : "#faf8f4",
-      border: `1px solid ${dk ? "#333" : "#e8e2d9"}`,
-      borderRadius: 10,
-      textAlign: "center",
-    },
-  };
+  const saving = discountedPrice - product?.price;
 
   return (
     <>
@@ -355,34 +113,32 @@ export default function ProductDetails() {
           href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500&display=swap"
           rel="stylesheet"
         />
-        {/* hide thumb scrollbar in WebKit */}
-        <style>{`.thumb-row::-webkit-scrollbar { display: none; }`}</style>
       </Helmet>
 
       <Navbar />
 
-      <div style={styles.page}>
-        <div style={styles.grid}>
+      <div className={`${styles.page} ${dk ? styles.dark : ""}`}>
+        <div className={styles.grid} data-desktop={isDesktop}>
 
           {/* ── LEFT: image panel ── */}
-          <div style={styles.left}>
-            <motion.div style={styles.galleryMain} onClick={() => setZoom(true)}>
+          <div className={styles.left}>
+            <motion.div className={styles.galleryMain} onClick={() => setZoom(true)}>
               <AnimatePresence mode="wait">
                 <motion.img
                   key={activeImg}
                   src={imgFix(product?.images?.[activeImg]?.url)}
                   alt={product?.name}
-                  style={styles.mainImg}
+                  className={styles.mainImg}
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.25 }}
                 />
               </AnimatePresence>
-              <div style={styles.zoomBadge}>🔍 zoom</div>
+              <div className={styles.zoomBadge}>🔍 zoom</div>
             </motion.div>
 
-            <div className="thumb-row" style={styles.thumbRow}>
+            <div className={styles.thumbRow}>
               {product?.images?.map((img, i) => (
                 <motion.img
                   key={i}
@@ -390,63 +146,43 @@ export default function ProductDetails() {
                   alt={`View ${i + 1}`}
                   whileHover={{ scale: 1.08, y: -2 }}
                   onClick={() => setActiveImg(i)}
-                  style={{
-                    width: isMobile ? 54 : 64,
-                    height: isMobile ? 54 : 64,
-                    borderRadius: 10,
-                    objectFit: "cover",
-                    cursor: "pointer",
-                    flexShrink: 0,           // keep thumbs from shrinking in scroll row
-                    border: activeImg === i
-                      ? "2px solid #c8a96e"
-                      : `1.5px solid ${dk ? "#444" : "#e8e2d9"}`,
-                    transition: "border-color .2s",
-                  }}
+                  className={`${styles.thumbImg} ${activeImg === i ? styles.activeThumb : ""}`}
                 />
               ))}
             </div>
           </div>
 
           {/* ── RIGHT: info panel ── */}
-          <div style={styles.right}>
-            <div style={styles.tag}>🏷 {product?.category}</div>
-            <h1 style={styles.productName}>{product?.name}</h1>
+          <div className={styles.right}>
+            <div className={styles.tag}>🏷 {product?.category}</div>
+            <h1 className={styles.productName}>{product?.name}</h1>
 
-            <div style={styles.ratingRow}>
-              <span style={{ color: "#c8a96e", fontSize: 14, letterSpacing: 2 }}>★★★★★</span>
-              <span style={{ fontSize: 13, color: dk ? "#aaa" : "#8a8580" }}>Premium product</span>
+            <div className={styles.ratingRow}>
+              <span className={styles.stars}>★★★★★</span>
+              <span className={styles.ratingText}>Premium product</span>
             </div>
 
-            <p style={styles.desc}>{product?.description}</p>
-            <div style={styles.divider} />
+            <p className={styles.desc}>{product?.description}</p>
+            <div className={styles.divider} />
 
-            <div style={styles.priceRow}>
-              <span style={styles.priceMain}>{product?.price} EGP</span>
-              <span style={styles.priceOld}>{discountedPrice} EGP</span>
-              <span style={styles.saleChip}>SALE</span>
+            <div className={styles.priceRow}>
+              <span className={styles.priceMain}>{product?.price} EGP</span>
+              <span className={styles.priceOld}>{discountedPrice} EGP</span>
+              <span className={styles.saleChip}>SALE</span>
             </div>
-            <div style={styles.saving}>💚 You save {saving} EGP</div>
-            <div style={styles.divider} />
+            <div className={styles.saving}>💚 You save {saving} EGP</div>
+            <div className={styles.divider} />
 
-            <div style={styles.actionRow}>
-              <div style={styles.qtyCtrl}>
-                <button style={styles.qtyBtn} onClick={() => setQty(Math.max(1, qty - 1))}>−</button>
-                <div style={styles.qtyNum}>{qty}</div>
-                <button style={styles.qtyBtn} onClick={() => setQty(Math.min(10, qty + 1))}>+</button>
+            <div className={styles.actionRow}>
+              <div className={styles.qtyCtrl}>
+                <button className={styles.qtyBtn} onClick={() => setQty(Math.max(1, qty - 1))}>−</button>
+                <div className={styles.qtyNum}>{qty}</div>
+                <button className={styles.qtyBtn} onClick={() => setQty(Math.min(10, qty + 1))}>+</button>
               </div>
 
               <motion.button
                 whileTap={{ scale: 0.97 }}
-                style={{
-                  ...styles.btnCart,
-                  background: added
-                    ? "linear-gradient(135deg,#065f46,#047857)"
-                    : "linear-gradient(135deg,#16a34a,#059669)",
-                  color: "#fff",
-                  boxShadow: added
-                    ? "0 4px 24px rgba(16,185,129,.35)"
-                    : "0 4px 20px rgba(16,185,129,.22)",
-                }}
+                className={`${styles.btnCart} ${added ? styles.btnCartAdded : ""}`}
                 onClick={handleCart}
                 disabled={loadingCart}
               >
@@ -455,12 +191,7 @@ export default function ProductDetails() {
 
               <motion.button
                 whileTap={{ scale: 0.85 }}
-                style={{
-                  ...styles.btnFav,
-                  borderColor: fav ? "#e11d48" : (dk ? "#444" : "#e8e2d9"),
-                  background: fav ? "#fff1f2" : (dk ? "#2a2a2a" : "#fff"),
-                  color: fav ? "#e11d48" : (dk ? "#fff" : "#1a1714"),
-                }}
+                className={`${styles.btnFav} ${fav ? styles.btnFavActive : ""}`}
                 onClick={handleFav}
                 disabled={loadingFav}
                 aria-label={fav ? "Remove from wishlist" : "Add to wishlist"}
@@ -469,36 +200,31 @@ export default function ProductDetails() {
               </motion.button>
             </div>
 
-            <div style={styles.divider} />
+            <div className={styles.divider} />
 
-            <div style={styles.features}>
+            <div className={styles.features}>
               {[
                 { icon: "🚚", label: "Fast Delivery" },
                 { icon: "🔒", label: "Secure Payment" },
                 { icon: "⭐", label: "Premium Quality" },
                 { icon: "🔄", label: "30-Day Returns" },
               ].map(({ icon, label }) => (
-                <div key={label} style={styles.feature}>
+                <div key={label} className={styles.feature}>
                   <span>{icon}</span><span>{label}</span>
                 </div>
               ))}
             </div>
 
-            <div style={styles.trust}>
+            <div className={styles.trust}>
               {[
                 { icon: "🚚", label: "Fast\nDelivery" },
-                { icon: "🛡",  label: "Secure\nPayment" },
+                { icon: "🛡", label: "Secure\nPayment" },
                 { icon: "🔄", label: "30-Day\nReturns" },
                 { icon: "🏅", label: "2-Year\nWarranty" },
               ].map(({ icon, label }) => (
-                <div key={label} style={styles.trustItem}>
-                  <span style={{ fontSize: 18 }}>{icon}</span>
-                  <span style={{
-                    fontSize: 11,
-                    color: dk ? "#aaa" : "#8a8580",
-                    whiteSpace: "pre-line",
-                    lineHeight: 1.3,
-                  }}>{label}</span>
+                <div key={label} className={styles.trustItem}>
+                  <span className={styles.trustIcon}>{icon}</span>
+                  <span className={styles.trustLabel}>{label}</span>
                 </div>
               ))}
             </div>
@@ -510,21 +236,19 @@ export default function ProductDetails() {
       <AnimatePresence>
         {zoom && (
           <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             onClick={() => setZoom(false)}
-            style={{
-              position: "fixed", inset: 0,
-              background: "rgba(0,0,0,0.88)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              zIndex: 1000, cursor: "zoom-out",
-              padding: 16,             // breathing room on mobile
-            }}
+            className={styles.zoomModal}
           >
             <motion.img
-              initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }}
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.9 }}
               src={imgFix(product?.images?.[activeImg]?.url)}
               alt={product?.name}
-              style={{ maxWidth: "100%", maxHeight: "90%", borderRadius: 16 }}
+              className={styles.zoomImg}
             />
           </motion.div>
         )}

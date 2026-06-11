@@ -1,108 +1,244 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* ============================================================
+   APP.CSS — EGZone Global Styles
+   Purple #6d28d9  |  Gold #c9a84c  |  BG #0a0a0f
+   ============================================================ */
+
+/* ── RESET & BASE ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+:root {
+  --bg-page:      #0a0a0f;
+  --bg-surface:   #0e0e1a;
+  --bg-elevated:  #12122a;
+  --bg-card:      #13132a;
+  --border:       #1e1e35;
+  --border-md:    #2a2a45;
+
+  --accent:       #6d28d9;
+  --accent-hover: #7c3aed;
+  --accent-light: #a78bfa;
+  --accent-dim:   rgba(109,40,217,0.15);
+
+  --gold:         #c9a84c;
+  --gold-hover:   #e8c96a;
+  --gold-dim:     rgba(201,168,76,0.15);
+
+  --text-primary: #e8e8f8;
+  --text-muted:   #8888aa;
+  --text-faint:   #555577;
+
+  --badge-red:    #ef4444;
+
+  --radius-sm:    8px;
+  --radius-md:    12px;
+  --radius-lg:    16px;
+
+  --shadow-sm:    0 2px 12px rgba(0,0,0,0.4);
+  --shadow-md:    0 8px 32px rgba(0,0,0,0.5);
+  --shadow-lg:    0 20px 60px rgba(0,0,0,0.6);
+
+  --transition:   0.2s ease;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+body {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', 'Cairo', Arial, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+
+  -webkit-font-smoothing: antialiased;
 }
 
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-surface); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* ── LINKS ── */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover { color: var(--accent-light); }
+
+/* ── SELECTION ── */
+::selection {
+  background: var(--accent-dim);
+  color: var(--accent-light);
+}
+
+/* ── CARDS ── */
 .card {
-  padding: 2em;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
 }
 
-.read-the-docs {
-  color: #888;
-} */
-
-
-
-.navbar {
-  text-decoration:none;
-  list-style: none;
-  display: flex;
-  justify-content: space-around;
-  background-color:rgb(219, 211, 179);
-  padding: 20px 15px;
-  width: 80%;
-  margin: 20px auto;
-  font-size: 18px;
-  border-radius: 8px;
-}
-li {
+/* ── BUTTONS (global base) ── */
+button {
+  font-family: inherit;
   cursor: pointer;
 }
 
-
-/* LIGHT MODE (default) */
-body {
-  background: #f5f5f5;
-  color: #111;
-  transition: 0.3s ease;
-}
-
-/* DARK MODE */
-body.dark {
-  background: #121212;
+.btn-primary {
+  background: var(--accent);
+  border: 2px solid var(--accent);
   color: #fff;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 14px;
+  transition: background var(--transition), border-color var(--transition);
+}
+.btn-primary:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #0a0a0f;
 }
 
-/* cards */
-body.dark .card {
-  background: #1e1e1e;
-  color: #fff;
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 14px;
+  transition: background var(--transition), color var(--transition);
+}
+.btn-outline:hover {
+  background: var(--gold);
+  color: #0a0a0f;
 }
 
-/* items */
-body.dark .item {
-  background: #1a1a1a;
-  border-color: #333;
+/* ── INPUTS (global) ── */
+input, select, textarea {
+  font-family: inherit;
+  background: var(--bg-elevated);
+  border: 1.5px solid var(--border-md);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+input::placeholder, textarea::placeholder {
+  color: var(--text-faint);
 }
 
-body.dark .topHeader {
-  background: #1e1e1e;
+/* ── BADGES ── */
+.badge-accent {
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  color: var(--accent-light);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
 }
 
-body.dark .quickItem {
-  background: #222;
+.badge-gold {
+  background: var(--gold-dim);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
 }
 
-/* إخفاء أي chat widget */
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 16px 0;
+}
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.section-title span {
+  color: var(--gold);
+}
+
+/* ── OFFLINE BANNER ── */
+.offline {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a0a;
+  border: 1.5px solid var(--gold);
+  color: var(--gold);
+  padding: 10px 28px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 9999;
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+}
+
+/* ── TOASTER OVERRIDE ── */
+[data-hot-toast] {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-md) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+/* ── HIDE CHAT WIDGETS ── */
 iframe[src*="tawk"],
 iframe[src*="crisp"],
 iframe[src*="intercom"],
-[class*="chat"],
-[class*="widget"],
-[id*="chat"],
-[id*="widget"] {
+[class*="chat-widget"],
+[id*="chat-widget"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+/* ── OLD DARK MODE COMPAT (في حال في كود بيستخدم body.dark) ── */
+body.dark {
+  background: var(--bg-page);
+  color: var(--text-primary);
+}
+body.dark .card    { background: var(--bg-card);    color: var(--text-primary); }
+body.dark .item    { background: var(--bg-elevated); border-color: var(--border); }
+body.dark .topHeader  { background: var(--bg-surface); }
+body.dark .quickItem  { background: var(--bg-elevated); }

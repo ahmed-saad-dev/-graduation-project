@@ -1,82 +1,133 @@
-.container {
-  min-height: 100vh;
-  /* background: #f5f5f5 !important; */
-  width: 40%;
-  margin: 5px auto;
+/* ============================================ */
+/* EDIT PROFILE - MODERN PROFESSIONAL DESIGN    */
+/* Clean | Minimal | Premium                   */
+/* ============================================ */
+
+:root {
+  --bg-primary: #f8f9fa;
+  --bg-surface: #ffffff;
+  --text-primary: #1a1a2e;
+  --text-secondary: #6c757d;
+  --text-muted: #adb5bd;
+  --border-color: #e9ecef;
+  --border-focus: #2563eb;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.05);
+  --shadow-focus: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  --accent: #2563eb;
+  --accent-dark: #1d4ed8;
+  --danger: #ef4444;
+  --danger-light: #fee2e2;
+  --success: #10b981;
+  --success-light: #d1fae5;
 }
 
-/* Top Header */
+.dark {
+  --bg-primary: #0f172a;
+  --bg-surface: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border-color: #334155;
+  --border-focus: #3b82f6;
+  --shadow-focus: 0 0 0 4px rgba(59, 130, 246, 0.2);
+  --accent: #3b82f6;
+  --accent-dark: #2563eb;
+  --success-light: #064e3b;
+  --danger-light: #7f1d1d;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--bg-primary);
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  color: var(--text-primary);
+  transition: background 0.2s ease;
+}
+
+/* ========== HEADER ========== */
 .topHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  background: #fff;
+  padding: 16px 20px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
 .backBtn {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: none;
-  background: transparent;
-  color: #333;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 1.2rem;
   transition: all 0.2s ease;
 }
 
 .backBtn:hover {
-  background: #f0f0f0;
+  background: var(--border-color);
+  transform: scale(0.95);
 }
 
 .headerTitle {
-  font-size: 18px;
+  font-size: 1.25rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
   margin: 0;
 }
 
 .placeholder {
-  width: 36px;
+  width: 40px;
 }
 
-/* Content */
+/* ========== CONTENT ========== */
 .content {
-  padding: 20px 16px;
+  padding: 32px 20px;
 }
 
-/* Avatar */
+/* ========== AVATAR ========== */
 .avatarContainer {
   display: flex;
   justify-content: center;
-  margin-bottom: 25px;
+  margin-bottom: 32px;
 }
 
 .avatar {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
 .initials {
-  font-size: 36px;
-  font-weight: bold;
-  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
 }
 
-/* Form */
+/* ========== FORM ========== */
 .formGroup {
   margin-bottom: 20px;
 }
@@ -84,86 +135,89 @@
 .label {
   display: flex;
   align-items: center;
-  font-size: 14px;
-  color: #555;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
   margin-bottom: 8px;
-  font-weight: 500;
 }
 
 .label svg {
-  margin-right: 8px;
-  color: #22c55e;
+  font-size: 0.9rem;
+  color: var(--accent);
 }
 
 .input {
   width: 100%;
   padding: 14px 16px;
-  border: 2px solid #e8e8e8;
-  border-radius: 12px;
-  font-size: 15px;
-  transition: all 0.3s ease;
-  box-sizing: border-box;
-  background: #fafafa;
+  border: 1.5px solid var(--border-color);
+  border-radius: 14px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-family: inherit;
 }
 
 .input:focus {
   outline: none;
-  border-color: #22c55e;
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-focus);
 }
 
 .input::placeholder {
-  color: #bbb;
+  color: var(--text-muted);
 }
 
-/* Alerts */
+/* ========== ALERTS ========== */
 .errorMsg {
-  background: #fef2f2;
-  color: #dc3545;
+  background: var(--danger-light);
+  color: var(--danger);
   padding: 12px 16px;
-  border-radius: 10px;
+  border-radius: 14px;
   margin-bottom: 20px;
-  font-size: 14px;
-  border: 1px solid #fecaca;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
 .successMsg {
-  background: #f0fdf4;
-  color: #22c55e;
+  background: var(--success-light);
+  color: var(--success);
   padding: 12px 16px;
-  border-radius: 10px;
+  border-radius: 14px;
   margin-bottom: 20px;
-  font-size: 14px;
-  border: 1px solid #bbf7d0;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
-/* Buttons */
+/* ========== BUTTONS ========== */
 .saveBtn {
   width: 100%;
   padding: 14px;
   border: none;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  color: #fff;
+  border-radius: 14px;
+  background: var(--accent);
+  color: white;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   margin-bottom: 12px;
-  box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
 }
 
 .saveBtn:hover:not(.disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+  background: var(--accent-dark);
+  transform: translateY(-1px);
 }
 
 .saveBtn:active:not(.disabled) {
@@ -171,63 +225,71 @@
 }
 
 .saveBtn.disabled {
-  background: #d1d5db;
+  background: var(--text-muted);
   cursor: not-allowed;
-  box-shadow: none;
+  opacity: 0.6;
 }
 
 .cancelBtn {
   width: 100%;
   padding: 12px;
-  border-radius: 12px;
-  border: 2px solid #e8e8e8;
-  background: #fff;
-  color: #666;
+  border-radius: 14px;
+  border: 1.5px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
   font-weight: 600;
-  font-size: 15px;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .cancelBtn:hover {
-  border-color: #dc3545;
-  color: #dc3545;
-  background: #fef2f2;
+  border-color: var(--danger);
+  color: var(--danger);
+  background: var(--danger-light);
 }
 
-/* Loading */
+/* ========== LOADING ========== */
 .centered {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  gap: 15px;
-  color: #666;
+  gap: 16px;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
 }
 
 .spinner {
-  animation: spin 1s linear infinite;
+  animation: spin 0.8s linear infinite;
+  color: var(--accent);
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-/* Responsive */
-@media (max-width: 480px) {
+/* ========== RESPONSIVE ========== */
+@media (max-width: 600px) {
+  .container {
+    max-width: 100%;
+  }
+
   .content {
-    padding: 15px 12px;
+    padding: 24px 16px;
   }
 
   .avatar {
-    width: 90px;
-    height: 90px;
+    width: 88px;
+    height: 88px;
   }
 
   .initials {
-    font-size: 32px;
+    font-size: 2rem;
+  }
+
+  .input {
+    padding: 12px 14px;
   }
 }
-

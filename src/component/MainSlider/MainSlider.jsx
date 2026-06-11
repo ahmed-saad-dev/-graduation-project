@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./MainSlider.module.css";
 import Slider from "react-slick";
-// import img1 from "../../assets/b.png";
-// import img2 from "../../assets/c.png";
 import img3 from "../../assets/a.jpg";
 import img4 from "../../assets/d.jpg";
 import img5 from "../../assets/e.jpg";
@@ -11,156 +9,111 @@ export default function MainSlider() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 600,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
     autoplay: true,
     autoplaySpeed: 5000,
     pauseOnHover: true,
-    dotsClass: "slick-dots",
+    dotsClass: "slick-dots egz-dots",
     responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          dots: true,
-          autoplaySpeed: 4000,
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          dots: true,
-          autoplaySpeed: 3000,
-        }
-      }
-    ]
+      { breakpoint: 1024, settings: { dots: true, autoplaySpeed: 4000 } },
+      { breakpoint: 768,  settings: { dots: true, autoplaySpeed: 3500 } },
+    ],
   };
 
-  // Prevent any click from doing anything
-  const preventNavigation = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    // Absolutely nothing happens - purely visual
-  };
+  const prevent = (e) => { e.preventDefault(); e.stopPropagation(); };
 
   return (
-    <div style={{ textDecoration: "none", cursor: "default" }}>
+    <div className={styles.root}>
       <div className={styles.sliderContainer}>
-        <div className={styles.slider}>
-          {/* Gradient Overlay */}
-          <div className={styles.overlay}></div>
 
-          {/* Text Content - Purely Visual */}
-          <div className={styles.content} onClick={preventNavigation}>
-            <span className={styles.badge}>
-              🔥 LIMITED TIME OFFER
-            </span>
+        {/* dark gradient overlay — left side for text readability */}
+        <div className={styles.overlay} />
 
-            <h1 className={styles.title}>
-              Summer Sale
-            </h1>
+        {/* purple-gold bottom glow line */}
+        <div className={styles.glowLine} />
 
-            <p className={styles.description}>
-              Up to 70% off on electronics, fashion, and home appliances.
-              <br />
-              Free shipping on orders over $50.
-            </p>
+        {/* TEXT CONTENT */}
+        <div className={styles.content} onClick={prevent}>
 
-            {/* Static Visual Button - Does NOTHING */}
-            <button 
-              className={styles.shopButton}
-              onClick={preventNavigation}
-              style={{ pointerEvents: "none" }}
-            >
-              SHOP NOW →
+          <span className={styles.badge}>
+            <span className={styles.badgeDot} />
+            عرض محدود الوقت
+          </span>
+
+          <h1 className={styles.title}>
+            تسوّق بلا حدود
+            <span className={styles.titleAccent}> EGZone</span>
+          </h1>
+
+          <p className={styles.description}>
+            خصومات تصل إلى ٧٠٪ على الإلكترونيات والملابس والمنزليات
+            <br />
+            شحن مجاني على الطلبات فوق ٥٠٠ جنيه
+          </p>
+
+          <div className={styles.actions}>
+            <button className={styles.shopBtn} onClick={prevent} style={{ pointerEvents: "none" }}>
+              تسوق الآن
+              <span className={styles.btnArrow}>←</span>
+            </button>
+            <button className={styles.offersBtn} onClick={prevent} style={{ pointerEvents: "none" }}>
+              عروض اليوم
             </button>
           </div>
 
-          <Slider {...settings} className={styles.slick}>
-            {/* <div className={styles.slide}>
-              <img
-                src={img1}
-                alt="Summer fashion collection"
-                className={styles.image}
-              />
-            </div> */}
-
-            
-
-            <div className={styles.slide}>
-              <img
-                src={img3}
-                alt="Electronics deals"
-                className={styles.image}
-              />
-            </div>
-
-            <div className={styles.slide}>
-              <img
-                src={img4}
-                alt="Audio equipment sale"
-                className={styles.image}
-              />
-            </div>
-
-            <div className={styles.slide}>
-              <img
-                src={img5}
-                alt="Men's fashion"
-                className={styles.image}
-              />
-            </div>
-          </Slider>
+          {/* trust badges */}
+          <div className={styles.trust}>
+            <span>✓ شحن سريع</span>
+            <span>✓ ضمان الجودة</span>
+            <span>✓ إرجاع مجاني</span>
+          </div>
         </div>
+
+        {/* SLIDES */}
+        <Slider {...settings} className={styles.slick}>
+          <div className={styles.slide}>
+            <img src={img3} alt="إلكترونيات" className={styles.image} />
+          </div>
+          <div className={styles.slide}>
+            <img src={img4} alt="أجهزة صوت" className={styles.image} />
+          </div>
+          <div className={styles.slide}>
+            <img src={img5} alt="أزياء رجالية" className={styles.image} />
+          </div>
+        </Slider>
       </div>
 
-      <style>
-        {`
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(30px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          
-          .slick-dots {
-            bottom: 25px !important;
-            z-index: 10 !important;
-          }
-          
-          .slick-dots li button:before {
-            color: white !important;
-            font-size: 10px !important;
-            opacity: 0.6 !important;
-            transition: all 0.3s ease !important;
-          }
-          
-          .slick-dots li:hover button:before {
-            opacity: 1 !important;
-          }
-          
-          .slick-dots li.slick-active button:before {
-            color: #198754 !important;
-            opacity: 1 !important;
-            transform: scale(1.2) !important;
-          }
-          
-          @media (max-width: 768px) {
-            .slick-dots {
-              bottom: 15px !important;
-            }
-            
-            .slick-dots li button:before {
-              font-size: 8px !important;
-            }
-          }
-        `}
-      </style>
+      <style>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(28px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes badgePulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(109,40,217,0.5); }
+          50%       { box-shadow: 0 0 0 7px rgba(109,40,217,0); }
+        }
+
+        /* dots */
+        .egz-dots { bottom: 28px !important; z-index: 10 !important; }
+        .egz-dots li button:before {
+          color: rgba(255,255,255,0.5) !important;
+          font-size: 9px !important;
+          transition: all 0.3s ease !important;
+        }
+        .egz-dots li.slick-active button:before {
+          color: #c9a84c !important;
+          opacity: 1 !important;
+          font-size: 12px !important;
+        }
+        .egz-dots li:hover button:before { opacity: 1 !important; }
+
+        @media (max-width: 768px) {
+          .egz-dots { bottom: 14px !important; }
+        }
+      `}</style>
     </div>
   );
 }

@@ -1,12 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { ThemeContext } from "../../Context/ThemeContext";
 import styles from "./Category.module.css";
 
 export default function Category() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { theme } = useContext(ThemeContext);
+  const isDark = theme === "dark";
 
   // ================= GET PRODUCTS & EXTRACT CATEGORIES =================
   const getCategoriesFromProducts = async () => {
@@ -16,9 +19,7 @@ export default function Category() {
       const { data } = await axios.get(
         "https://egzone.runasp.net/api/Products",
         {
-          headers: token
-            ? { Authorization: `Bearer ${token}` }
-            : {},
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
           params: { pageSize: 100 },
         }
       );
@@ -40,15 +41,8 @@ export default function Category() {
       const addedNames = new Set();
 
       products.forEach((product) => {
-        const category =
-          product.category ||
-          product.categoryDto ||
-          {};
-
-        const categoryName =
-          category.name ||
-          category.categoryName ||
-          product.categoryName;
+        const category = product.category || product.categoryDto || {};
+        const categoryName = category.name || category.categoryName || product.categoryName;
 
         if (categoryName && !addedNames.has(categoryName)) {
           addedNames.add(categoryName);
@@ -56,10 +50,7 @@ export default function Category() {
           uniqueCategories.push({
             id: category.id || categoryName,
             name: categoryName,
-            image:
-              category.image ||
-              category.imageUrl ||
-              "/default-category.png",
+            image: category.image || category.imageUrl || "/default-category.png",
           });
         }
       });
@@ -84,47 +75,46 @@ export default function Category() {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 4,
+      items: 5,
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
+      breakpoint: { max: 1024, min: 640 },
+      items: 3,
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
+      breakpoint: { max: 640, min: 0 },
+      items: 2,
     },
   };
 
   // ================= LOADING =================
   if (loading) {
     return (
-      <div className="text-center mt-5">
-        <i className="fa fa-spinner fa-spin fs-3"></i>
+      <div className="text-center mt-5 py-5">
+        <div className="spinner-border text-warning" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="container mt-4">
-      <h2 className="text-center fw-bold mb-4">
-        Categories
-      </h2>
+    <div className={`container ${styles.container} ${isDark ? "dark" : ""}`}>
+      <h2 className={styles.title}>Shop by Category</h2>
 
       <Carousel
         responsive={responsive}
         infinite={true}
         autoPlay={true}
-        autoPlaySpeed={2500}
+        autoPlaySpeed={3000}
         keyBoardControl={true}
         transitionDuration={500}
         removeArrowOnDeviceType={["tablet", "mobile"]}
+        containerClass="carousel-container"
+        itemClass="carousel-item-padding-40-px"
       >
         {categories.map((cat) => (
-          <div
-            key={cat.id}
-            className={styles.imagContainer}
-          >
+          <div key={cat.id} className={styles.imagContainer}>
             <img
               src={cat.image}
               alt={cat.name}
@@ -133,10 +123,8 @@ export default function Category() {
                 e.target.src = "/default-category.png";
               }}
             />
-
-            <p className="text-center fw-semibold mt-2">
-              {cat.name}
-            </p>
+            <p className={styles.categoryName}>{cat.name}</p>
+            <p className={styles.productCount}>Explore now →</p>
           </div>
         ))}
       </Carousel>

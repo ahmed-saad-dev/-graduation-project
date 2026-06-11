@@ -1,16 +1,300 @@
-.cardHover {
-    position: relative;
-}
-.cardHover:hover .btn {
-  opacity: 1;
-  transform: translateY(70%);
-}
-.btn {
-    opacity: 0;
-    transform: translateY(130%);
+/* ============================================================
+   PRODUCTS PAGE — EGZone Luxury Dark
+   Purple #6d28d9  |  Gold #c9a84c  |  BG #0a0a0f
+   ============================================================ */
 
+/* ========== SUB CATEGORIES ========== */
+
+
+.subCategoriesWrapper {
+  margin: 24px 0;
+  padding: 20px 24px;
+  background: #0e0e1a;
+  border-radius: 16px;
+  border: 1px solid #1e1e35;
+  transition: border-color 0.2s;
 }
-.btn:hover {
-    color: #116c42 !important;
-    background-color: #0e5d3824 !important;
+.subCategoriesWrapper:hover {
+  border-color: #c9a84c;
+}
+
+.subCategoriesTitle {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #c9a84c;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.subCategoriesTitle::before {
+  content: '✦';
+  font-size: 10px;
+}
+
+.subCategoriesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.subCategoryBtn {
+  padding: 7px 18px;
+  border-radius: 40px;
+  border: 1px solid #2a2a45;
+  background: transparent;
+  color: #8888aa;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.subCategoryBtn:hover {
+  background: #1e1e35;
+  color: #a78bfa;
+  border-color: #6d28d9;
+  transform: translateY(-2px);
+}
+
+.activeSub {
+  background: #6d28d9;
+  color: #fff;
+  border-color: #6d28d9;
+  box-shadow: 0 2px 10px rgba(109,40,217,0.35);
+}
+.activeSub:hover {
+  background: #7c3aed;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ========== HEADER ROW ========== */
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 28px 0 20px;
+}
+
+.productsTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: #e8e8f8;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+
+.wishlistBadge {
+  background: #6d28d9;
+  color: #fff;
+  border-radius: 50px;
+  padding: 3px 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.productsCount {
+  font-size: 13px;
+  color: #555577;
+  font-weight: 500;
+}
+
+/* ========== PRODUCTS GRID ========== */
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 560px) {
+  .productsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+}
+
+/* ========== PRODUCT CARD ========== */
+.productCard {
+  background: #0e0e1a;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #1e1e35;
+  position: relative;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.productCard:hover {
+  transform: translateY(-6px);
+  border-color: #c9a84c;
+  box-shadow: 0 12px 32px rgba(201,168,76,0.12);
+}
+
+.productLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+/* ── Image ── */
+.imageContainer {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background: #12122a;
+}
+@media (max-width: 560px) {
+  .imageContainer { height: 170px; }
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.productCard:hover .productImage {
+  transform: scale(1.06);
+}
+
+/* ── Wishlist button ── */
+.wishlistBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(14,14,26,0.85);
+  backdrop-filter: blur(4px);
+  color: #8888aa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.wishlistBtn:hover {
+  transform: scale(1.12);
+  background: rgba(201,168,76,0.15);
+  color: #c9a84c;
+}
+.wishlistActive {
+  color: #ef4444;
+  background: rgba(239,68,68,0.12);
+}
+.wishlistActive:hover {
+  color: #f87171;
+  transform: scale(1.12);
+}
+
+/* ── Category tag ── */
+.categoryTag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(135deg, #c9a84c, #e8c96a);
+  color: #0a0a0f;
+  padding: 4px 12px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* ── Product info ── */
+.productInfo {
+  padding: 14px 14px 8px;
+}
+
+.productName {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #e8e8f8;
+}
+
+.productPrice {
+  color: #c9a84c;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+/* ── Cart button ── */
+.cartBtnWrapper {
+  padding: 0 14px 14px;
+}
+
+.cartBtn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: #6d28d9;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.cartBtn:hover {
+  background: #c9a84c;
+  color: #0a0a0f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(201,168,76,0.3);
+}
+
+/* ========== EMPTY STATE ========== */
+.emptyState {
+  text-align: center;
+  padding: 60px 40px;
+  background: #0e0e1a;
+  border-radius: 20px;
+  border: 1px solid #1e1e35;
+}
+.emptyState p {
+  font-size: 15px;
+  color: #8888aa;
+  margin-bottom: 20px;
+}
+
+.viewAllBtn {
+  padding: 10px 28px;
+  cursor: pointer;
+  background: #6d28d9;
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background 0.2s, transform 0.2s;
+}
+.viewAllBtn:hover {
+  background: #c9a84c;
+  color: #0a0a0f;
+  transform: translateY(-2px);
+}
+
+/* ========== RETRY ========== */
+.retryBtn {
+  padding: 9px 22px;
+  cursor: pointer;
+  background: #6d28d9;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+.retryBtn:hover {
+  background: #7c3aed;
 }

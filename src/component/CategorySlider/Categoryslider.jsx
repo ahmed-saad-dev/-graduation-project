@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+// import styles from "./Categoryslider.module.css"; // ✅ استيراد الـ CSS المنفصل
 
 const CATEGORIES_CONFIG = {
   "All": { icon: "✦", color: "#198754" },

@@ -1,17 +1,203 @@
+/* ============================================ */
+/* CATEGORY SLIDER - PURPLE & GOLD LUXURY       */
+/* Modern | Responsive | Premium                */
+/* ============================================ */
+
+/* Light Mode */
+:root {
+  --cat-slider-bg: #fef9f0;
+  --cat-card-bg: #ffffff;
+  --cat-text-primary: #1e0a3c;
+  --cat-text-secondary: #6b4c8a;
+  --cat-border: rgba(107, 33, 165, 0.12);
+  --cat-shadow: 0 2px 8px rgba(76, 29, 149, 0.06);
+  --cat-shadow-hover: 0 6px 18px rgba(212, 175, 55, 0.15);
+  --gold: #d4af37;
+  --purple: #6b21a5;
+  --purple-light: #8b5cf6;
+  --gradient-purple: linear-gradient(135deg, #6b21a5, #8b5cf6);
+  --gradient-gold: linear-gradient(135deg, #d4af37, #f5e7a3);
+}
+
+/* Dark Mode */
+:global(.dark) {
+  --cat-slider-bg: #0a0418;
+  --cat-card-bg: #1a1127;
+  --cat-text-primary: #f3eeff;
+  --cat-text-secondary: #c4b5e3;
+  --cat-border: rgba(212, 175, 55, 0.15);
+  --cat-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --cat-shadow-hover: 0 6px 18px rgba(212, 175, 55, 0.12);
+}
+
+/* ========== MAIN CONTAINER ========== */
+.container {
+  padding: 0 20px;
+  margin: 32px auto;
+  max-width: 1400px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+    margin: 24px auto;
+  }
+}
+
+/* ========== TITLE ========== */
+.title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 28px;
+  background: var(--gradient-gold);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-family: 'Playfair Display', serif;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 3px;
+}
+
+/* ========== IMAGE CONTAINER ========== */
 .imagContainer {
-    padding: 30px 10px 10px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    margin-right: 30px;
-    margin-left: 30px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--cat-card-bg);
+  border-radius: 20px;
+  margin: 10px;
+  transition: all 0.3s ease;
+  border: 1px solid var(--cat-border);
+  cursor: pointer;
 }
+
+.imagContainer:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+  box-shadow: var(--cat-shadow-hover);
+}
+
+/* ========== IMAGE STYLE ========== */
 .imgStyle {
-    display: block;
-    height: 280px;
-    width: 270px;
-    margin: 10px 20px 2px;
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 16px;
+  transition: transform 0.3s ease;
 }
-.iconColor {
-    color:  #e27d17;
+
+.imagContainer:hover .imgStyle {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .imgStyle {
+    height: 150px;
+    max-width: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .imgStyle {
+    height: 120px;
+    max-width: 140px;
+  }
+}
+
+/* ========== CATEGORY NAME ========== */
+.categoryName {
+  text-align: center;
+  font-weight: 700;
+  margin-top: 14px;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: var(--cat-text-primary);
+  transition: color 0.2s ease;
+}
+
+.imagContainer:hover .categoryName {
+  color: var(--purple);
+}
+
+/* ========== PRODUCT COUNT BADGE (اختياري) ========== */
+.productCount {
+  font-size: 0.7rem;
+  color: var(--cat-text-secondary);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* ========== CAROUSEL CUSTOMIZATION ========== */
+/* React Multi Carousel Custom Arrows */
+:global(.react-multiple-carousel__arrow) {
+  background: var(--gradient-purple);
+  border-radius: 50%;
+  box-shadow: var(--cat-shadow);
+  z-index: 10;
+}
+
+:global(.react-multiple-carousel__arrow:hover) {
+  background: var(--gradient-gold);
+}
+
+:global(.react-multiple-carousel__arrow::before) {
+  color: white;
+  font-size: 1rem;
+}
+
+:global(.react-multiple-carousel__arrow--left) {
+  left: 0;
+}
+
+:global(.react-multiple-carousel__arrow--right) {
+  right: 0;
+}
+
+/* Dots Styling */
+:global(.react-multi-carousel-dot button) {
+  background: var(--cat-border);
+  border: none;
+}
+
+:global(.react-multi-carousel-dot--active button) {
+  background: var(--gold);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .imagContainer {
+    padding: 16px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .imagContainer {
+    padding: 12px;
+  }
+  
+  .categoryName {
+    font-size: 0.8rem;
+  }
 }
