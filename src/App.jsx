@@ -46,7 +46,7 @@ import AdminDashboard from "./component/AdminDashboard/AdminDashboard.jsx";
 import AdminProducts from "./component/AdminProducts/AdminProducts.jsx";
 import AdminReports from "./component/AdminReports/AdminReports.jsx";
 import Checkout from "./component/Checkout/Checkout";
-import Offers from "./component/navbar/Offers";
+import Offers from "./component/Navbar/Offers";
 const queryClient = new QueryClient();
 
 const routes = createBrowserRouter([
